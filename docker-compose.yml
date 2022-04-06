@@ -1,0 +1,20 @@
+version: "3.5"
+
+services:
+  database:
+    image: mongo:latest
+    container_name: mongo_db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: users
+    ports:
+      - "27017:27017"
+    networks:
+      - MONGO
+    # volumes:
+    #   - ./mongodb:/data/db
+
+networks:
+  MONGO:
+    name: MONGO
