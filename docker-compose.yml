@@ -13,7 +13,7 @@ services:
       - MONGO
 
   upet-server:
-    build: /server/
+    build: /upet-server/
     container_name: upet-server
     environment:
      MONGO_INITDB_ROOT_USERNAME: admin
@@ -27,7 +27,7 @@ services:
       - database
 
   upet-client:
-    build: /client/
+    build: /upet-client/
     container_name: upet-client
     environment:
      API_URL: admin:password123@upet-server:3030
