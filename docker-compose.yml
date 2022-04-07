@@ -16,10 +16,7 @@ services:
     build: /upet-server/
     container_name: upet-server
     environment:
-     MONGO_INITDB_ROOT_USERNAME: admin
-     MONGO_INITDB_ROOT_PASSWORD: password123
-     DB_HOST: database:27017
-     MONGO_URL: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${DB_HOST}
+     MONGO_URL: mongodb://admin:password123@database:27017
     ports:
       - "3030:3030"
     networks:
