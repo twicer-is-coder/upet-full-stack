@@ -7,13 +7,36 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password123
-      MONGO_INITDB_DATABASE: users
     ports:
       - "27017:27017"
     networks:
       - MONGO
-    # volumes:
-    #   - ./mongodb:/data/db
+
+  upet-server:
+    build: /server/
+    container_name: upet-server
+    environment:
+     MONGO_INITDB_ROOT_USERNAME: admin
+     MONGO_INITDB_ROOT_PASSWORD: password123
+     DB_HOST: database:27017
+    ports:
+      - "3030:3030"
+    networks:
+      - MONGO
+    depends_on:
+      - database
+
+  upet-client:
+    build: /client/
+    container_name: upet-client
+    environment:
+     API_URL: admin:password123@upet-server:3030
+    ports:
+      - "4000:3000"
+    networks:
+      - MONGO
+    depends_on:
+      - upet-server   
 
 networks:
   MONGO:
