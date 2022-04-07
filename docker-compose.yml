@@ -1,0 +1,43 @@
+version: "3.5"
+
+services:
+  database:
+    image: mongo:latest
+    container_name: mongo_db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    ports:
+      - "27017:27017"
+    networks:
+      - MONGO
+
+  upet-server:
+    build: /upet-server/
+    container_name: upet-server
+    environment:
+     MONGO_INITDB_ROOT_USERNAME: admin
+     MONGO_INITDB_ROOT_PASSWORD: password123
+     DB_HOST: database:27017
+    ports:
+      - "3030:3030"
+    networks:
+      - MONGO
+    depends_on:
+      - database
+
+  upet-client:
+    build: /upet-client/
+    container_name: upet-client
+    environment:
+     API_URL: admin:password123@upet-server:3030
+    ports:
+      - "3000:3000"
+    networks:
+      - MONGO
+    depends_on:
+      - upet-server   
+
+networks:
+  MONGO:
+    name: MONGO

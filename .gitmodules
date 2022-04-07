@@ -1,0 +1,6 @@
+[submodule "upet-server"]
+	path = upet-server
+	url = https://github.com/twicer-is-coder/upet-server
+[submodule "upet-client"]
+	path = upet-client
+	url = https://github.com/twicer-is-coder/upet-client
